@@ -235,7 +235,7 @@ public sealed class RecipeManager : IRecipeManager
     }
 
     public IReadOnlyList<Recipe> SearchByTitle(string searchText) =>
-        recipes.Values;
+        recipes.Values.Where(r => r.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
     public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
         throw new NotImplementedException("Part B: implement SearchByIngredient.");
