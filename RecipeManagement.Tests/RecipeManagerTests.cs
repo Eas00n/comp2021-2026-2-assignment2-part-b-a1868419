@@ -215,7 +215,7 @@ public sealed class RecipeManagerTests
     }
 
     //Part B
-    //Test add title search coverage
+    //Test add title search coverage.
     [Fact]
     public void SearchByTitle_ShouldReturnMatchingRecipes()
     {
@@ -225,5 +225,16 @@ public sealed class RecipeManagerTests
         Assert.Equal(2, results.Count);
         Assert.Contains(results, recipe => recipe.Title == "Recipe A");
         Assert.Contains(results, recipe => recipe.Title == "Recipe B");
+    }
+
+    //Tests that title search supports partial matching.
+    [Fact]
+    public void SearchByTitle_ShouldSupportPartialMatching()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByTitle("A");
+        Assert.Single(results);
+        Assert.Equal("Recipe A", results[0].Title);
     }
 }
