@@ -213,4 +213,17 @@ public sealed class RecipeManagerTests
         Assert.True(manager.StartCooking(10));
         Assert.Equal("First step", manager.PeekNextInstruction());
     }
+
+    //Part B
+    //Test add title search coverage
+    [Fact]
+    public void SearchByTitle_ShouldReturnMatchingRecipes()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByTitle("recipe");
+        Assert.Equal(2, results.Count);
+        Assert.Contains(results, recipe => recipe.Title == "Recipe A");
+        Assert.Contains(results, recipe => recipe.Title == "Recipe B");
+    }
 }
