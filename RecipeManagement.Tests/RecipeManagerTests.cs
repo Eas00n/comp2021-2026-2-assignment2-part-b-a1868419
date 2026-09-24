@@ -288,4 +288,45 @@ public sealed class RecipeManagerTests
         var matchingRecipes = results.Count(r => r.Id == 30);
         Assert.Equal(1, matchingRecipes);
     }
+
+    //Tests that recipes are returned in highest protein order.
+    [Fact]
+    public void GetHighestProteinRecipes_ShouldReturnHighestProteinRecipes()
+    {
+        var manager = CreateManager();
+        manager.AddRecipe(new Recipe
+        {
+            Id = 30,
+            Title = "High Protein Recipe",
+            Nutrition = new NutritionInfo
+            {
+                ProteinG = 50
+            }
+        });
+
+        manager.AddRecipe(new Recipe
+        {
+            Id = 40,
+            Title = "Medium Protein Recipe",
+            Nutrition = new NutritionInfo
+            {
+                ProteinG = 30
+            }
+        });
+
+        manager.AddRecipe(new Recipe
+        {
+            Id = 50,
+            Title = "Higher Protein Recipe",
+            Nutrition = new NutritionInfo
+            {
+                ProteinG = 40
+            }
+        });
+
+        var results = manager.GetHighestProteinRecipes(2);
+        Assert.Equal(2, results.Count);
+        Assert.Equal("High Protein Recipe", results[0].Title);
+        Assert.Equal("Higher Protein Recipe", results[1].Title);
+    }
 }
