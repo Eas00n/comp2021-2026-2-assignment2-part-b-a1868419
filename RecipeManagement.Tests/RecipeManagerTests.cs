@@ -355,4 +355,15 @@ public sealed class RecipeManagerTests
         Assert.Single(results);
         Assert.Equal("Protein Recipe", results[0].Title);
     }
+
+    //Tests that non-positive count returns an empty result.
+    [Fact]
+    public void GetHighestProteinRecipes_ShouldReturnEmptyForNonPositiveCount()
+    {
+        var manager = CreateManager();
+        var resultsZero = manager.GetHighestProteinRecipes(0);
+        var resultsNegative = manager.GetHighestProteinRecipes(-1);
+        Assert.Empty(resultsZero);
+        Assert.Empty(resultsNegative);
+    }
 }
