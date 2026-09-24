@@ -329,4 +329,30 @@ public sealed class RecipeManagerTests
         Assert.Equal("High Protein Recipe", results[0].Title);
         Assert.Equal("Higher Protein Recipe", results[1].Title);
     }
+
+    //Tests that recipes without protein data are ignored.
+    [Fact]
+    public void GetHighestProteinRecipes_ShouldIgnoreMissingProteinValues()
+    {
+        var manager = CreateManager();
+        manager.AddRecipe(new Recipe
+        {
+            Id = 30,
+            Title = "No Protein Recipe"
+        });
+
+        manager.AddRecipe(new Recipe
+        {
+            Id = 40,
+            Title = "Protein Recipe",
+            Nutrition = new NutritionInfo
+            {
+                ProteinG = 25
+            }
+        });
+
+        var results = manager.GetHighestProteinRecipes(5);
+        Assert.Single(results);
+        Assert.Equal("Protein Recipe", results[0].Title);
+    }
 }
