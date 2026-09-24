@@ -366,4 +366,14 @@ public sealed class RecipeManagerTests
         Assert.Empty(resultsZero);
         Assert.Empty(resultsNegative);
     }
+
+    //Tests that an existing recipe can be saved and checked.
+    [Fact]
+    public void AddSavedRecipe_ShouldSaveExistingRecipe()
+    {
+        var manager = CreateManager();
+        var result = manager.AddSavedRecipe(10);
+        Assert.True(result);
+        Assert.True(manager.IsRecipeSaved(10));
+    }
 }
