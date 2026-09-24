@@ -237,4 +237,14 @@ public sealed class RecipeManagerTests
         Assert.Single(results);
         Assert.Equal("Recipe A", results[0].Title);
     }
+
+    //Tests that a blank title search returns all recipes.
+    [Fact]
+    public void SearchByTitle_ShouldReturnAllRecipesForBlankSearch()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByTitle("");
+        Assert.Equal(2, results.Count);
+    }
 }
