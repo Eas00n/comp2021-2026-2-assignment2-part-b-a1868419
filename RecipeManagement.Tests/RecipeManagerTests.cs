@@ -414,4 +414,14 @@ public sealed class RecipeManagerTests
         Assert.Contains(10, results);
         Assert.Contains(20, results);
     }
+
+    //Tests that removing a recipe that is not saved returns false.
+    [Fact]
+    public void RemoveSavedRecipe_ShouldReturnFalseForUnsavedRecipe()
+    {
+        var manager = CreateManager();
+        var result = manager.RemoveSavedRecipe(10);
+        Assert.False(result);
+        Assert.False(manager.IsRecipeSaved(10));
+    }
 }
