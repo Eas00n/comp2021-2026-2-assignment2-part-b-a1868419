@@ -390,4 +390,15 @@ public sealed class RecipeManagerTests
         Assert.False(duplicateResult);
         Assert.True(manager.IsRecipeSaved(10));
     }
+
+    //Tests that a saved recipe can be removed.
+    [Fact]
+    public void RemoveSavedRecipe_ShouldRemoveSavedRecipe()
+    {
+        var manager = CreateManager();
+        manager.AddSavedRecipe(10);
+        var result = manager.RemoveSavedRecipe(10);
+        Assert.True(result);
+        Assert.False(manager.IsRecipeSaved(10));
+    }
 }
