@@ -401,4 +401,17 @@ public sealed class RecipeManagerTests
         Assert.True(result);
         Assert.False(manager.IsRecipeSaved(10));
     }
+
+    //Tests that saved recipe IDs can be returned.
+    [Fact]
+    public void GetSavedRecipes_ShouldReturnSavedRecipeIds()
+    {
+        var manager = CreateManager();
+        manager.AddSavedRecipe(10);
+        manager.AddSavedRecipe(20);
+        var results = manager.GetSavedRecipes();
+        Assert.Equal(2, results.Count);
+        Assert.Contains(10, results);
+        Assert.Contains(20, results);
+    }
 }
