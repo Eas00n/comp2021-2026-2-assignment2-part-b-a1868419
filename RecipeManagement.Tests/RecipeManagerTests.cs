@@ -276,6 +276,14 @@ public sealed class RecipeManagerTests
     {
         var manager = CreateManager();
 
+        var recipe = new Recipe
+        {
+            Id = 30,
+            Title = "Recipe C",
+            Ingredients = new() { "apple", "green apples" }
+        };
+        manager.AddRecipe(recipe);
+
         var results = manager.SearchByIngredient("apple");
         Assert.Single(results);
         Assert.Equal("Recipe A", results[0].Title);
