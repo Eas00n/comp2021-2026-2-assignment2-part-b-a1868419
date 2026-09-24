@@ -258,4 +258,15 @@ public sealed class RecipeManagerTests
         Assert.Single(results);
         Assert.Equal("Recipe A", results[0].Title);
     }
+
+    //Tests that ingredient search is case-insensitive.
+    [Fact]
+    public void SearchByIngredient_ShouldBeCaseInsensitive()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByIngredient("APPLE");
+        Assert.Single(results);
+        Assert.Equal("Recipe A", results[0].Title);
+    }
 }
