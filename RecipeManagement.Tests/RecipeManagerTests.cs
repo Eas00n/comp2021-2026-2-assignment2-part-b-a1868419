@@ -424,4 +424,21 @@ public sealed class RecipeManagerTests
         Assert.False(result);
         Assert.False(manager.IsRecipeSaved(10));
     }
+
+    //Tests an integrated Part B workflow from search to saved recipe.
+    [Fact]
+    public void PartBWorkflow_ShouldSearchAndSaveRecipe()
+    {
+        var manager = CreateManager();
+        var searchResults = manager.SearchByTitle("Recipe A");
+        Assert.Single(searchResults);
+        Assert.Equal(10, searchResults[0].Id);
+
+        var saved = manager.AddSavedRecipe(searchResults[0].Id);
+        Assert.True(saved);
+        Assert.True(manager.IsRecipeSaved(10));
+
+        var savedRecipes = manager.GetSavedRecipes();
+        Assert.Contains(10, savedRecipes);
+    }
 }
