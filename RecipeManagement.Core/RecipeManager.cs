@@ -17,6 +17,7 @@ public sealed class RecipeManager : IRecipeManager
     private LinkedList<int> cookingPlan;
     private Stack<int> removedRecipes;
     private Queue<string> instructions;
+    private HashSet<int> savedRecipes;
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
         // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
@@ -52,6 +53,7 @@ public sealed class RecipeManager : IRecipeManager
         cookingPlan = new LinkedList<int>();
         removedRecipes = new Stack<int>();
         instructions = new Queue<string>();
+        savedRecipes = new HashSet<int>();
     }
 
     public int RecipeCount => recipes.Count;
@@ -253,8 +255,14 @@ public sealed class RecipeManager : IRecipeManager
             .ToList();
     }
 
-    public bool AddSavedRecipe(int recipeId) =>
-        throw new NotImplementedException("Part B: implement AddSavedRecipe.");
+    public bool AddSavedRecipe(int recipeId)
+    {
+        if (!recipes.ContainsKey(recipeId))
+        {
+            return false;
+        }
+        return savedRecipes.Add(recipeId);
+    }
 
     public bool RemoveSavedRecipe(int recipeId) =>
         throw new NotImplementedException("Part B: implement RemoveSavedRecipe.");
