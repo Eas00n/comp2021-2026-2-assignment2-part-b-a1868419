@@ -247,4 +247,15 @@ public sealed class RecipeManagerTests
         var results = manager.SearchByTitle("");
         Assert.Equal(2, results.Count);
     }
+
+    //Tests that ingredient search returns recipes containing the requested ingredient.
+    [Fact]
+    public void SearchByIngredient_ShouldReturnMatchingRecipes()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByIngredient("apple");
+        Assert.Single(results);
+        Assert.Equal("Recipe A", results[0].Title);
+    }
 }
