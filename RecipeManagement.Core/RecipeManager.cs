@@ -238,8 +238,7 @@ public sealed class RecipeManager : IRecipeManager
         recipes.Values.Where(r => r.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
 
     public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByIngredient.");
-
+        recipes.Values.Where(r => r.Ingredients.Any(i => i.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ToList();
     public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
         throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
 
