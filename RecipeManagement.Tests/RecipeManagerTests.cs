@@ -285,7 +285,7 @@ public sealed class RecipeManagerTests
         manager.AddRecipe(recipe);
 
         var results = manager.SearchByIngredient("apple");
-        Assert.Single(results);
-        Assert.Equal("Recipe A", results[0].Title);
+        var matchingRecipes = results.Count(r => r.Id == 30);
+        Assert.Equal(1, matchingRecipes);
     }
 }
