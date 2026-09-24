@@ -376,4 +376,18 @@ public sealed class RecipeManagerTests
         Assert.True(result);
         Assert.True(manager.IsRecipeSaved(10));
     }
+
+    //Tests that non-existing recipes cannot be saved and duplicates are prevented.
+    [Fact]
+    public void AddSavedRecipe_ShouldRejectInvalidIdAndDuplicate()
+    {
+        var manager = CreateManager();
+        var invalidResult = manager.AddSavedRecipe(999);
+        var firstResult = manager.AddSavedRecipe(10);
+        var duplicateResult = manager.AddSavedRecipe(10);
+        Assert.False(invalidResult);
+        Assert.True(firstResult);
+        Assert.False(duplicateResult);
+        Assert.True(manager.IsRecipeSaved(10));
+    }
 }
