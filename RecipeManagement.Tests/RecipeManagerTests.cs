@@ -269,4 +269,15 @@ public sealed class RecipeManagerTests
         Assert.Single(results);
         Assert.Equal("Recipe A", results[0].Title);
     }
+
+    //Tests that a matching recipe is returned only once when multiple ingredients match.
+    [Fact]
+    public void SearchByIngredient_ShouldReturnEachRecipeOnce()
+    {
+        var manager = CreateManager();
+
+        var results = manager.SearchByIngredient("apple");
+        Assert.Single(results);
+        Assert.Equal("Recipe A", results[0].Title);
+    }
 }
